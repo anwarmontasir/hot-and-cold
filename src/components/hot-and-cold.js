@@ -14,16 +14,18 @@ export default class HotAndCold extends React.Component {
         }
     }
 
-    onSubmit(e){
-        e.preventDefault();
+    makeGuess(numberGuessed) {
+        this.setState({numberGuessed: parseInt(numberGuessed, 10)});
+        console.log('numberGuessed', this.state.numberGuessed);
+        console.log('correctAnswer', this.state.correctAnswer);
     }
 
     render() {
         return (
             <main>
                 <h1>Hot and Cold</h1>
-                <form onSubmit={this.onSubmit}>
-                    <NumberInput id="number" min={1} max={100} value={this.state.numberGuessed} onChange={numberGuessed => this.setState({numberGuessed}) } />
+                <form onSubmit={e => this.onSubmit(e)}>
+                    <NumberInput id="number" min={1} max={100} value={this.state.numberGuessed} onChange={numberGuessed => this.setState({numberGuessed}) } onMakeGuess={numberGuessed => this.makeGuess({numberGuessed}) } />
                 </form>
                 <RateGuess message={this.state.guessMessage} />
             </main>
